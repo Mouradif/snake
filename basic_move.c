@@ -6,7 +6,7 @@
 /*   By: mkejji <mkejji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 05:00:38 by mkejji            #+#    #+#             */
-/*   Updated: 2015/11/27 09:23:05 by mkejji           ###   ########.fr       */
+/*   Updated: 2015/11/30 19:00:22 by mkejji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 int		snake_move(t_map map, t_snake *snake, char vdir, char hdir)
 {
+	relocate(snake->h);
 	if (vdir == 'U')
 	{
 		if (snake->h->y == 0)
@@ -40,21 +41,16 @@ int		snake_move(t_map map, t_snake *snake, char vdir, char hdir)
 			return (screen_game_over());
 		snake->h->x++;
 	}
-	return (relocate(snake->h));
+	return (1);
 }
 
 int		relocate(t_snakepoint *s)
 {
 	if (s->n)
 	{
-		if (ft_abs(s->n->x - s->x) >= 2)
-			s->n->x = s->n->x - (s->n->x - s->x) / 2;
-		if (ft_abs(s->n->y - s->y) > 1)
-			s->n->y = s->n->y - (s->n->y - s->y) / 2;
-		return (relocate(s->n));
+		relocate(s->n);
+		s->n->y = s->y;
+		s->n->x = s->x;
 	}
-	else
-	{
-		return (1);
-	}
+	return (1);
 }

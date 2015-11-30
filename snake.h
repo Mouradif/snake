@@ -6,7 +6,7 @@
 /*   By: mkejji <mkejji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 04:48:15 by mkejji            #+#    #+#             */
-/*   Updated: 2015/11/27 09:43:00 by mkejji           ###   ########.fr       */
+/*   Updated: 2015/11/30 19:18:27 by mkejji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct				s_snake
 	unsigned char			status;
 	unsigned char			has_just_eaten;
 	char					c;
+	char					hc;
 	char					vd;
 	char					hd;
 	struct s_snakepoint		*h;
@@ -58,7 +59,7 @@ int				relocate(t_snakepoint *s);
 t_map			*new_map(unsigned int width, unsigned int height, char terrain);
 t_snakepoint	*new_point(unsigned int x, unsigned int y);
 t_snake 		*new_snake(unsigned int x, unsigned int y,
-		char vd, char hd, char c, t_map *map);
+					char vd, char hd, char hc, char c, t_map *map, unsigned int size);
 void			display_map(const t_map *m, const t_snake *s);
 char			in_spot(unsigned int x, unsigned int y, const t_snakepoint *s);
 

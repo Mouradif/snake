@@ -6,7 +6,7 @@
 /*   By: mkejji <mkejji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 08:00:12 by mkejji            #+#    #+#             */
-/*   Updated: 2015/11/27 08:53:51 by mkejji           ###   ########.fr       */
+/*   Updated: 2015/11/30 19:12:10 by mkejji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,10 @@ void	display_map(const t_map *m, const t_snake *s)
 	{
 		while (j < m->w)
 		{
-			c = (in_spot(j, i, s->h)) ? s->c : m->g[i][j];
+			if (in_spot(j, i, s->h))
+				c = (i == s->h->y && j == s->h->x) ? s->hc : s->c;
+			else
+				c = m->g[i][j];
 			ft_putchar(c);
 			j++;
 		}

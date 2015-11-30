@@ -6,7 +6,7 @@
 /*   By: mkejji <mkejji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/27 04:47:39 by mkejji            #+#    #+#             */
-/*   Updated: 2015/11/27 08:54:01 by mkejji           ###   ########.fr       */
+/*   Updated: 2015/11/30 19:19:22 by mkejji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,24 +49,28 @@ t_snakepoint	*new_point(unsigned int x, unsigned int y)
 	return (point);
 }
 
-t_snake 		*new_snake(unsigned int x, unsigned int y, char vd, char hd, char c, t_map *map)
+t_snake 		*new_snake(unsigned int x, unsigned int y, char vd, char hd, char hc, char c, t_map *map, unsigned int size)
 {
 	t_snake			*snake;
-	unsigned int	nx;
-	unsigned int	ny;
+	t_snakepoint	*point;
 
-	nx = x;
-	ny = y;
-	nx = (hd == 'L') ? x - 1 : nx;
-	nx = (hd == 'R') ? x + 1 : nx;
-	ny = (vd == 'U') ? y - 1 : ny;
-	ny = (vd == 'D') ? y + 1 : ny;
 	snake = (t_snake*)malloc(sizeof(t_snake));
 	snake->vd = vd;
 	snake->hd = hd;
 	snake->c = c;
+	snake->hc = hc;
 	snake->map = map;
-	snake->h = new_point(x, y);
-	snake->h->n = new_point(nx, ny);
+	point = new_point(x, y);
+	snake->h = point;
+	while (size)
+	{
+		x = (hd == 'R') ? x - 1 : x;
+		x = (hd == 'L') ? x + 1 : x;
+		y = (vd == 'D') ? y - 1 : y;
+		y = (vd == 'U') ? y + 1 : y;
+		point->n = new_point(x, y);
+		point = point->n;
+		size--;
+	}
 	return (snake);
 }
