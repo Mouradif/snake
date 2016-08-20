@@ -28,7 +28,7 @@ int	main(void)
 	info.c_cc[VMIN] = 1;
 	info.c_cc[VTIME] = 0;
 	tcsetattr(0, TCSANOW, &info);
-	m = new_map(200, 50, '.');
+	m = new_map(20, 8, '.');
 	s = new_snake(2, 2, 'U', 'L', '*', '#', m, 15);
 	display_map(m, s);
 	c = 1;
